@@ -16,6 +16,10 @@
       <link href="{{ asset('Frontend/assets/css/venobox.css') }}" rel="stylesheet" type="text/css" >
       <link rel="stylesheet" href="{{ asset('Frontend/assets/css/styles.css') }}" />
       <link rel="stylesheet" href="{{ asset('Frontend/assets/css/corestyle.css') }}" />
+      <!-- Toastr CSS -->
+      <link href="{{ asset('Backend/assets/toster-js/css/toastr.css') }}" rel="stylesheet">
+      <!-- sweetalert2 CSS -->
+      <link href="{{ asset('Backend/assets/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
       @stack('css')
     
 </head>
@@ -47,6 +51,62 @@
     <script src="{{ asset('Frontend/assets/js/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('Frontend/assets/js/venobox.min.js') }}"></script>
     <script src="{{ asset('Frontend/assets/js/custom-scripts.js') }}"></script>
-    @stack('js')
+    <!--- Toastr js Start --->
+    <script src="{{ asset('Backend/assets/toster-js/js/toastr.js') }}"></script>
+    <!-- Sweet-Alert  -->
+    <script src="{{ asset('Backend/assets/vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('Backend/assets/vendor/sweetalert2/sweet-alert.init.js') }}"></script>
+    @stack('js')    
+     <!--- Toastr Message --->
+    <script>
+        @if(Session::has('message'))
+        var type="{{Session::get('alert-type','info')}}"
+        switch(type){
+            case 'info':
+                toastr.info("{{ Session::get('message') }}");
+                break;
+            case 'success':
+                toastr.success("{{ Session::get('message') }}");
+                break;
+            case 'warning':
+                toastr.warning("{{ Session::get('message') }}");
+                break;
+            case 'error':
+                toastr.error("{{ Session::get('message') }}");
+                break;
+        }
+        @endif
+    </script>
+    <!--- Laravel validation Message By Toaster --->
+    <script type="text/javascript">
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+            toastr.error('{{ $error }}', 'Error', {
+                closeButton:true,
+                progressBar:true,
+            });
+            @endforeach
+        @endif
+    </script>
+    <!--- Show District By Ajax In Search Filed --->
+    <script type="text/javascript">
+         jQuery(document).ready(function($) {
+             $(document).on('change', '.divition', function(){
+                var divition_id = $(this).val();
+                $.ajax({
+                    url: "{{ route('search.district.show') }}",
+                    type: "GET",
+                    data: {divition_id:divition_id},
+                    success:function(data){
+                       var html = '<option value"">-- Select Your District --</option>';
+                       $.each(data, function(key, v){
+                          html+= '<option value"'+v.district_name+'">'+v.district_name+'</option>';
+                       });
+                       $('.district').html(html);
+                    }
+                });
+             });
+         });
+    </script>
 </body>
 </html>

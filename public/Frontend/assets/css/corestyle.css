@@ -21,10 +21,9 @@ button#login {
 #login .container #login-row #login-column #login-box {
     margin-top: 60px;
     max-width: 660px;
-    height: 371px;
-    border: 2px solid #337ab7;
+    height: 410px;
     background-color: #e8e5e5;
-    padding: 23px;
+    padding: 25px;
   }
   #login .container #login-row #login-column #login-box #login-form {
     padding: 20px;
@@ -32,3 +31,167 @@ button#login {
   #login .container #login-row #login-column #login-box #login-form #register-link {
     margin-top: -85px;
   }
+  /** Register **/
+  #regi_form_design{
+    background: #2accc4;
+    padding: 15px;
+    border: 2px solid #3aa090;
+    color: black;
+    margin-top: 30px;
+  }
+  #name{
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 19px;
+    color: black;
+  }
+  #email{
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 19px;
+    color: black;
+  }
+  #password{
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 19px;
+    color: black;
+  }
+  #password_confirmation{
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 19px;
+    color: black;
+  }
+  #blood_group{
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 19px;
+    color: black;
+  }
+  #phone_number{
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 19px;
+    color: black;
+  }
+  #divition{
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 19px;
+    color: black;
+  }
+  #district{
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 19px;
+    color: black;
+  }
+  #upazila{
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 19px;
+    color: black;
+  }
+  #local_area{
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 19px;
+    color: black;
+  }
+  #association{
+    width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 19px;
+    color: black;
+  }
+  button#reg_button {
+    border-radius: 50px;
+}
+/** Login Css **/
+#password_login{
+  width: 100%;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid red;
+    padding: 10px;
+    font-size: 19px;
+    color: black;
+}
+#username{
+  width: 100%;
+  height: 50px;
+  border-radius: 50px;
+  border: 1px solid red;
+  padding: 10px;
+  font-size: 19px;
+  color: black;
+}
+/*User Blood card css*/
+/* .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+} */

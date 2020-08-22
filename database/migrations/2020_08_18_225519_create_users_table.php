@@ -21,8 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('blood_group')->nullable();
             $table->string('phone_number')->nullable();
-            $table->string('divition')->nullable();
-            $table->string('district')->nullable();
+            $table->integer('divition_id')->nullable();
+            $table->integer('district_id')->nullable();
             $table->string('upazila')->nullable();
             $table->string('local_area')->nullable();
             $table->string('association')->nullable();

@@ -59,7 +59,7 @@
                         <li><a href="about-us.html" title="About Us">About Us</a></li>
 
                         <li>
-                            <a href="#">Campaign</a>
+                            <a href="{{ route('search.resuit') }}">Campaign</a>
                             <ul class="drop-down">
                                 <li><a href="events.html">All Campaigns</a></li>
                             </ul>
@@ -74,11 +74,14 @@
 
                         <li>
                             <button><a class="btn btn-primary" id="login" href="{{ url('/login') }}">Login</a></button>
-                            {{-- <span><a id="login" href="#" class="btn btn-primary" >My Profile</a></span> --}}
                       
                         </li>
-
-
+                        <li>
+                            <a href="{{ url('/login') }}">
+                                <img height="30" width="30" src="{{ asset('Frontend/assets/team2.jpg') }}" alt="">
+                            </a>
+    
+                        </li>
                     </ul>
                 </div>
             </div>

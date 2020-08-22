@@ -23,8 +23,8 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="password" class="text-info">Password:</label><br>
-                                        <input type="password" id="password" class="form-control  @error('password') is-invalid @enderror" name="password" required>
+                                        <label for="password_login" class="text-info">Password:</label><br>
+                                        <input type="password" id="password_login" class="form-control  @error('password') is-invalid @enderror" name="password" required>
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong class="text-danger">{{ $message }}</strong>
@@ -46,6 +46,7 @@
                                     <div id="register-link" class="text-right">
                                         <a href="{{ url('/register') }}" class="text-info">Register here</a>
                                     </div>
+                                    <br><br>
                                 </form>
                             </div>
                         </div>

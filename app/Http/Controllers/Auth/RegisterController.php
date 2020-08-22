@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
+use Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Auth;
+
 class RegisterController extends Controller
 {
     /*
@@ -20,7 +20,7 @@ class RegisterController extends Controller
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
-    */
+     */
 
     use RegistersUsers;
 
@@ -38,9 +38,9 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        if(Auth::check() && Auth::user()->role->id == 1) {
+        if (Auth::check() && Auth::user()->role->id == 1) {
             $this->redirectTo = route('admin.dashboard');
-        } else{
+        } else {
             $this->redirectTo = route('user.dashboard');
         }
         $this->middleware('guest');
@@ -55,9 +55,16 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name'         => ['required', 'string', 'max:255'],
+            'email'        => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'     => ['required', 'string', 'min:5', 'confirmed'],
+            'blood_group'  => 'required',
+            'phone_number' => 'required',
+            'divition'     => 'required',
+            'district'     => 'required',
+            'upazila'      => 'required',
+            'local_area'   => 'required',
+            'association'  => 'required',
         ]);
     }
 
@@ -70,10 +77,18 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'role_id' => 2,
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'role_id'      => 2,
+            'name'         => $data['name'],
+            'email'        => $data['email'],
+            'password'     => Hash::make($data['password']),
+            'blood_group'  => $data['blood_group'],
+            'phone_number' => $data['phone_number'],
+            'divition_id'  => $data['divition'],
+            'district_id'  => $data['district'],
+            'upazila'      => $data['upazila'],
+            'local_area'   => $data['local_area'],
+            'association'  => $data['association'],
+            'status'       => 1,
         ]);
     }
 }
