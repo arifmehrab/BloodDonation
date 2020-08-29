@@ -23,12 +23,14 @@ Auth::routes();
 Route::get('/', 'Frontend\FrontendController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
-// Show District By Ajax For Register =======
+// Show District By Ajax For Register 
 Route::get('/show/destrict', 'Frontend\FrontendController@showDestrict')->name('show.destrict');
-// Show District By ajax For Search ======
+// Show District By ajax For Search 
 Route::get('/search/destrict/show', 'Frontend\SearchController@searchDestrictShow')->name('search.district.show');
-// Search Resuit ============
-Route::get('/search/resuit', 'Frontend\SearchController@searchResuit')->name('search.resuit');
+// Blood Local Area Suggest By ajax 
+Route::get('/area/search', 'Frontend\SearchController@areaSearch')->name('area.search');
+// Search Resuit
+Route::post('/search/resuit', 'Frontend\SearchController@searchResuit')->name('search.resuit');
 // =====================================================================
 // Admin Route Here
 // =====================================================================
@@ -46,12 +48,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
     Route::get('/district/edit/{id}', 'DistricController@edit')->name('district.edit');
     Route::put('/district/update/{id}', 'DistricController@update')->name('district.update');
     Route::delete('/district/destory/{id}', 'DistricController@destory')->name('district.destory');
-    // Association 
-    Route::get('/association', 'AssociationController@index')->name('association'); 
-    Route::post('/association/store', 'AssociationController@store')->name('association.store');
-    Route::get('/association/edit/{id}', 'AssociationController@edit')->name('association.edit');
-    Route::put('/association/update/{id}', 'AssociationController@update')->name('association.update');
-    Route::delete('/association/destory/{id}', 'AssociationController@destory')->name('association.destory'); 
 });
 // =====================================================================
 // User Route Here

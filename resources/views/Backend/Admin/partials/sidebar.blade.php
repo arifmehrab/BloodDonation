@@ -51,9 +51,6 @@
                 <li class="nav-item">
                   <a href="{{ route('admin.district') }}" class="nav-link">District</a>
                 </li>
-                <li class="nav-item">
-                  <a href="{{ route('admin.association') }}" class="nav-link">Associations</a>
-                </li>
               </ul>
             </div>
           </li>

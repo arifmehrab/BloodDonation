@@ -44,25 +44,18 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="logo" href="index.html"><img alt="" src="{{ asset('Frontend/assets') }}/images/logo.png"></a>
+                    <a class="logo" href="{{ url('/') }}"><img alt="" src="{{ asset('Frontend/assets') }}/images/logo.png"></a>
                 </div>
 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="drop">
-                            <a href="index.html" title="Home Layout 01">Home</a>
-                            <ul class="drop-down">
-                                <li><a href="index.html" title="Home Layout 01">Home Layout 1</a></li>
-                                <li><a href="home-2.html" title="Home Layout 02">Home Layout 2</a></li>
-                            </ul>
+                            <a href="{{ url('/') }}" title="Home Layout 01">Home</a>
                         </li>
                         <li><a href="about-us.html" title="About Us">About Us</a></li>
 
                         <li>
-                            <a href="{{ route('search.resuit') }}">Campaign</a>
-                            <ul class="drop-down">
-                                <li><a href="events.html">All Campaigns</a></li>
-                            </ul>
+                            <a href="">Campaign</a>
                         </li>
 
                         <li>
@@ -71,17 +64,17 @@
                                 <li><a href="blog.html">All Posts</a></li> 
                             </ul>
                         </li>
-
+                        @guest
                         <li>
                             <button><a class="btn btn-primary" id="login" href="{{ url('/login') }}">Login</a></button>
                       
                         </li>
+                        @else
                         <li>
-                            <a href="{{ url('/login') }}">
-                                <img height="30" width="30" src="{{ asset('Frontend/assets/team2.jpg') }}" alt="">
-                            </a>
-    
+                            <button><a class="btn btn-primary" id="userAccount" href="{{ route('user.dashboard') }}"><i class="fa fa-user"></i>My Account</a></button>
+                      
                         </li>
+                        @endguest
                     </ul>
                 </div>
             </div>

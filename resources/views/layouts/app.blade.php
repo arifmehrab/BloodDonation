@@ -88,6 +88,34 @@
             @endforeach
         @endif
     </script>
+    <!--- test ajax search --->
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(document).on('keyup', '.local_area', function(){
+                var value = $(this).val();
+                if( value != '' ) {
+                    $.ajax({
+                    url: "{{ route('area.search') }}",
+                    type: "GET",
+                    data: {value:value},
+                    success:function(data) {
+                        $('#show_area').show();
+                        var html = "";
+                        $.each(data, function(key, v){
+                            html+= "<tr><td>"+v.local_area+"<td></tr>";
+                        });
+                        $('#area_value').html(html);  
+                        console.log(data); 
+                    }
+                });
+                } else {
+                    $('#show_area').hide();
+                }
+            });
+        });
+
+    </script>
+    
     <!--- Show District By Ajax In Search Filed --->
     <script type="text/javascript">
          jQuery(document).ready(function($) {

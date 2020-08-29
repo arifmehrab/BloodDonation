@@ -10,7 +10,8 @@
                          <h2>Give Blade Save Life</h2>
                          <br>
                         <div class="card-body">
-                            <form action="">
+                            <form action="{{ route('search.resuit') }}" method="POST">
+                                @csrf
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -59,8 +60,21 @@
                                     <div class="col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label id="label_color">Your Local Area (ইউনিয়ন)* </label>
-                                            <input type="text" id="blad_group" name="local_area">
+                                            <input type="search" id="blad_group" class="local_area" name="local_area">
                                         </div>
+                                        <!--- show ajax search resuit -->
+                                        <div style="background: #fff; display: none; max-height: 400px; overflow-y: scroll; margin-top: 5px; padding: 1rem 0;" id="show_area">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <td>Suggest Area</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="area_value">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!--- show ajax search resuit -->
                                     </div><!-- End col-md-6 -->
                                     <div class="col-md-12">
                                         <input type="submit" class="btn btn-primary btn-block btn-lg" value="SEARCH" id="search">

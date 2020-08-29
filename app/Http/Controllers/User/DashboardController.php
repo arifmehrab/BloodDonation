@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     // User Dashboard =================
     public function index() {
-        return view('Backend.Admin.dashboard');
+        return view('Backend.user.dashboard');
     }
      // User Logout ======================
      public function logout()

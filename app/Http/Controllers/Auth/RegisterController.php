@@ -64,7 +64,6 @@ class RegisterController extends Controller
             'district'     => 'required',
             'upazila'      => 'required',
             'local_area'   => 'required',
-            'association'  => 'required',
         ]);
     }
 

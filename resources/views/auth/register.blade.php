@@ -4,7 +4,6 @@
 <div class="container">
     @php
         $divition = App\Models\divition::all();
-        $association = App\Models\association::all();
     @endphp
    <div class="row">
        <div class="col-md-2"></div><!-- end col md 2 -->
@@ -153,12 +152,7 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label for="association" class="text-light">Association (যদি কোন গ্র্রুপের সদস্য হন)*</label><br>
-                            <select name="association" id="association" class="form-control" required>
-                                <option value="no_asociation">No Association</option>
-                                @foreach($association as $row)
-                                <option value="{{ $row->associations_name }}">{{ $row->associations_name }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" name="association" class="form-control" id="association">
                                 @error('association')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

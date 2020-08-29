@@ -1,19 +1,32 @@
 @extends('layouts.app')
 @section('title', 'Blood | Resuit')
 @section('main_content')
+<hr>
+<div class="container">
 <div class="row">
-    <div class="col-md-4 col-sm-6">
-        <div class="card">
-            <img src="{{ asset('Frontend/assets/team2.jpg') }}" alt="John" style="width:100%">
-            <h1>John Doe</h1>
-            <p class="title">CEO & Founder, Example</p>
-            <p>Harvard University</p>
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <p><button>Contact</button></p>
+    @foreach($search_resuit as $row)
+    <div class="col-md-3 col-sm-6">
+        <div class="card card_style">
+            <img src="
+            @if($row->profile == NULL)
+            {{ asset('Frontend/assets/media/avator/avator.png') }}
+            @else
+            {{ asset('Frontend/assets/media/avator/'.$row->profile) }}
+            @endif
+            " 
+            alt="{{ $row->profile }}" style="width:100%; height:175px;">
+            <p><strong>Name:- </strong>{{ $row->name }}</p>
+            <p><strong>Blood Group:- </strong>{{ $row->blood_group }}</p>
+            <p><strong>Divition(বিভাগ):-</strong> {{ $row->divition_name }}</p>
+            <p><strong>District(জেলা):-</strong> {{ $row->district_name }}</p>
+            <p><strong>Upazila(থানা):-</strong> {{ $row->upazila }}</p>
+            <p><strong>Local Area(ইউনিয়ন):-</strong> {{ $row->local_area }}</p>
+            <p><strong>Mobile:-</strong> {{ $row->phone_number }}</p>
+            <p><a href="tel:{{ $row->phone_number }}" id="card_button">Call Now</a></p>
           </div>
     </div><!-- End colum -->
+    @endforeach
 </div><!-- End row -->
+</div><!-- container -->
+<br>
 @endsection
