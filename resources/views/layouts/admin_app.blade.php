@@ -23,8 +23,10 @@
     <link href="{{ asset('Backend/assets/toster-js/css/toastr.css') }}" rel="stylesheet">
     <!-- sweetalert2 CSS -->
     <link href="{{ asset('Backend/assets/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
-     <!-- Argon CSS -->
-     <link rel="stylesheet" href="{{ asset('Backend/assets/css/argon.css?v=1.1.0') }}" type="text/css">
+    <!-- summernotes CSS -->
+    <link href="{{ asset('Backend/assets/vendor/summernote/dist/summernote-bs4.css') }}" rel="stylesheet" />
+    <!-- Argon CSS -->
+    <link rel="stylesheet" href="{{ asset('Backend/assets/css/argon.css?v=1.1.0') }}" type="text/css">
   @stack('css')
 </head>
 
@@ -77,6 +79,8 @@
   <!-- Sweet-Alert  -->
   <script src="{{ asset('Backend/assets/vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
   <script src="{{ asset('Backend/assets/vendor/sweetalert2/sweet-alert.init.js') }}"></script>
+  <!-- Summernote Editor -->
+ <script src="{{ asset('Backend/assets/vendor/summernote/dist/summernote-bs4.min.js') }}"></script>
   @stack('js')
    <!--- Toastr Message --->
     <script>
@@ -146,5 +150,29 @@
         }
 
     </script>
+    <!--- Summery Editor Script --->
+    <script>
+        jQuery(document).ready(function() {
+    
+            $('.summernote').summernote({
+                height: 350, // set editor height
+                minHeight: null, // set minimum height of editor
+                maxHeight: null, // set maximum height of editor
+                focus: false // set focus to editable area after initializing summernote
+            });
+    
+            $('.inline-editor').summernote({
+                airMode: true
+            });
+    
+        });
+    
+        window.edit = function() {
+                $(".click2edit").summernote()
+            },
+            window.save = function() {
+                $(".click2edit").summernote('destroy');
+            }
+        </script>
 </body>
 </html>

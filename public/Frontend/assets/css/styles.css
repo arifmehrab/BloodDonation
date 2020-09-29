@@ -569,7 +569,7 @@ ol li {
 }
 .section-heading {
   position: relative;
-  font-size: 42px;
+  font-size: 34px;
   margin-bottom: 20px;
   text-transform: uppercase;
   font-family: 'Dosis', sans-serif;
@@ -1058,7 +1058,7 @@ header.one-page .navbar-nav > li > a span {
 /* 04. HOME PAGE */
 /***********************************************************************************************/
 .section-content-block {
-  padding: 100px 0 100px 0;
+  padding: 47px 0 60px 0;
   background: #FFFFFF;
 }
 .section-pure-white-bg {
@@ -1241,7 +1241,7 @@ header.one-page .navbar-nav > li > a span {
 }
 .section-banner {
   background-image: url("../images/home_1_slider_1.jpg");
-  padding: 250px 0px;
+  padding: 165px 0px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -1920,6 +1920,7 @@ header.one-page .navbar-nav > li > a span {
 .section-appointment {
   position: relative;
   overflow: hidden;
+  background: #deddd9e3;
 }
 .appointment-img {
   height: 650px;
@@ -2347,8 +2348,8 @@ header.one-page .navbar-nav > li > a span {
 .page-header h3 {
   color: #FFFFFF;
   text-align: center;
-  font-size: 36px;
-  line-height: 24px;
+  font-size: 30px;
+  line-height: 51px;
   font-weight: 500;
   font-family: 'Dosis', sans-serif;
   margin: 24px 0;

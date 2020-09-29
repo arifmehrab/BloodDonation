@@ -6,7 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\role;
-
+use App\Models\divition;
+use App\Models\district;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -37,8 +38,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    // Belongs To Role============
+    // Belongs To Role================
     public function role(){
         return $this->belongsTo(role::class, 'role_id', 'id');
+    }
+    // Belongs To Divition ============
+    public function divition()
+    {
+        return $this->belongsTo(divition::class, 'divition_id', 'id');
+    }
+    // Belongs To District =============
+    public function district()
+    {
+        return $this->belongsTo(district::class, 'district_id', 'id');
     }
 }

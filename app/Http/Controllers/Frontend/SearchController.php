@@ -23,7 +23,7 @@ class SearchController extends Controller
         $value  = $request->value;
         $location =  User::where('local_area', 'LIKE', '%'.$value.'%')
         ->where('status', 1)
-        ->get();
+        ->get()->groupBy('role_id');
         return response()->json($location);
     }
     // Search Resuit ====================
@@ -34,7 +34,9 @@ class SearchController extends Controller
         $divition = divition::where('id', $divition_id)->first();
         $divitionName = $divition->divition_name;
         // district
-        $district = $request->district;
+        $district_id = $request->district;
+        $district = district::where('id', $district_id)->first();
+        $district_name = $district->district_name;
         // upazila
         $upazila = $request->upazila;
         // local area
@@ -48,12 +50,13 @@ class SearchController extends Controller
                          ->select('users.*', 'divitions.divition_name', 'districts.district_name')
                          ->where('blood_group', 'LIKE', '%'.$blood_group.'%')
                          ->where('divition_name', 'LIKE', '%'.$divitionName.'%')
-                         ->where('district_name', 'LIKE', '%'.$district.'%')
+                         ->where('district_name', 'LIKE', '%'.$district_name.'%')
                          ->where('upazila', 'LIKE', '%'.$upazila.'%')
                          ->where('local_area', 'LIKE', '%'.$local_area.'%')
                          ->where('status', 1)
                          ->orderBy('id', 'ASC')
                          ->paginate(20);
+                         //return $search_resuit;
         return view('Frontend.pages.search_resuit', compact('search_resuit'));
     }
 

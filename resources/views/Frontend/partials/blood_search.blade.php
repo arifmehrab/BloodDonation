@@ -7,7 +7,13 @@
                 <div class="banner-content">
                    <!--- Search Form Start ---->
                      <div class="card">
-                         <h2>Give Blade Save Life</h2>
+                         <h2>
+                             @if(Session::get('language') == 'english')
+                             {{ $homeSettingOne->banner_title_en }}
+                             @else
+                             {{ $homeSettingOne->banner_title_bn }}
+                             @endif
+                         </h2>
                          <br>
                         <div class="card-body">
                             <form action="{{ route('search.resuit') }}" method="POST">
@@ -15,7 +21,13 @@
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label id="label_color" for="blad_group">Your Blood Group (রক্তের গ্র্রুপ)*</label>
+                                            <label id="label_color" for="blad_group">
+                                                @if(Session::get('language') == 'english')
+                                                Your Blood Group *
+                                                @else
+                                                আপনার রক্তের গ্র্রুপ *
+                                                @endif
+                                            </label>
                                             <select id="blad_group" name="blood_group" required>
                                                 <option value="">-- Select Blood Group --</option>
                                                 <option value="A+">A+</option>
@@ -31,7 +43,13 @@
                                     </div><!-- End col-md-6 -->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label id="label_color">Your Divition (বিভাগ)*</label>
+                                            <label id="label_color">
+                                                @if(Session::get('language') == 'english')
+                                                Your Divition Name *
+                                                @else
+                                                আপনার বিভাগের  নাম *
+                                                @endif
+                                            </label>
                                             <select name="divition" id="blad_group" class="divition" required>
                                                 <option value="">-- Select Your Divition --</option>
                                                 @foreach($divitions as $row)
@@ -44,23 +62,42 @@
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label id="label_color">Your District (জেলা)*</label>
-                                            <select name="district" id="blad_group" required class="district">
+                                            <label id="label_color">
+                                                @if(Session::get('language') == 'english')
+                                                Your District Name *
+                                                @else
+                                                আপনার জেলার নাম *
+                                                @endif
+                                            </label>
+                                            <select name="district" id="blad_group" required class="district" required>
                                             </select>
                                         </div>
                                     </div><!-- End col-md-6 -->
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label id="label_color">Your Area Upazila (থানা)*</label>
-                                            <input type="text" id="blad_group" name="upazila">
+                                            <label id="label_color">
+                                                @if(Session::get('language') == 'english')
+                                                Your Upazila Name *
+                                                @else
+                                                আপনার থানার নাম *
+                                                @endif
+                                            </label>
+                                            <select name="upazila" id="blad_group" required class="upazila">
+                                            </select>
                                           </div>
                                     </div><!-- End col-md-6 -->
                                 </div><!-- End row -->
                                 <div class="form-row">
                                     <div class="col-md-12 col-sm-12">
                                         <div class="form-group">
-                                            <label id="label_color">Your Local Area (ইউনিয়ন)* </label>
-                                            <input type="search" id="blad_group" class="local_area" name="local_area">
+                                            <label id="label_color">
+                                                @if(Session::get('language') == 'english')
+                                                Your Local Area Like Union Name *
+                                                @else
+                                                আপনার এরিয়া অথবা ইউনিয়ন এর নাম দিন *
+                                                @endif
+                                             </label>
+                                            <input type="search" id="blad_group" class="local_area" name="local_area" required>
                                         </div>
                                         <!--- show ajax search resuit -->
                                         <div style="background: #fff; display: none; max-height: 400px; overflow-y: scroll; margin-top: 5px; padding: 1rem 0;" id="show_area">

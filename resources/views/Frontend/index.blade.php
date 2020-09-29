@@ -8,165 +8,82 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-                <h2>We are helping people from 40 years</h2>
+                <h2>
+                    @if(Session::get('language') == 'english')
+                        {{ $homeSettingOne->donar_regi_title_en }}
+                        @else
+                        {{ $homeSettingOne->donar_regi_title_bn }}
+                    @endif
+                </h2>
                 <p>
-                    You can give blood at any of our blood donation venues all over the world. We have total sixty thousands donor centers and visit thousands of other venues on various occasions.                            
+                    @if(Session::get('language') == 'english')
+                    {{ $homeSettingOne->donar_regi_subtitle_en }}
+                    @else
+                    {{ $homeSettingOne->donar_regi_subtitle_bn }}
+                    @endif
                 </p>
-                <a class="btn btn-cta-2" href="#">Join Blood Donation</a>
+                <a class="btn btn-cta-2" href="{{ url('/register') }}">
+                    @if(Session::get('language') == 'english')
+                    {{ $homeSettingOne->donar_regi_button_en }}
+                    @else
+                    {{ $homeSettingOne->donar_regi_button_bn }}
+                    @endif
+                </a>
             </div> <!--  end .col-md-8  -->
         </div> <!--  end .row  -->
     </div>
 </section> 
 
-<!--  SECTION DONATION PROCESS -->
+<!--  GALLERY CONTENT  -->
 
-<section class="section-content-block section-process">
+<section class="section-content-block section-secondary-bg">
 
     <div class="container">
 
-        <div class="row">
+        <div class="row section-heading-wrapper">
 
             <div class="col-md-12 col-sm-12 text-center">
-                <h2 class="section-heading"><span>Donation</span> Process</h2>
-                <p class="section-subheading">The donation process from the time you arrive center until the time you leave</p>
-            </div> <!-- end .col-sm-10  -->                    
+                <h2 class="section-heading">
+                    @if(Session::get('language') == 'english')
+                    {{ $homeTitleSetting->donar_title_en }}
+                    @else
+                    {{ $homeTitleSetting->donar_title_bn }}
+                    @endif
+                </h2>
+            </div> <!-- end .col-sm-10  -->                      
 
-        </div> <!--  end .row  -->
+        </div> <!-- end .row  -->
+        <br>
+          <!-- Our Donar List -->
+          <div class="row">
+            @foreach($users as $row)
+            <div class="col-md-3 col-sm-6">
+                <div class="card card_style">
+                    <img src="
+                    @if($row->profile == NULL)
+                    {{ asset('Frontend/assets/media/avator/avator.png') }}
+                    @else
+                    {{ asset('Frontend/assets/media/avator/'.$row->profile) }}
+                    @endif
+                    " 
+                    alt="{{ $row->profile }}" style="width:100%; height:175px;">
+                    <p><strong>Name:- </strong>{{ $row->name }}</p>
+                    <p><strong>Blood Group:- </strong>{{ $row->blood_group }}</p>
+                    <p><strong>Divition(বিভাগ):-</strong> {{ $row->divition->divition_name }}</p>
+                    <p><strong>District(জেলা):-</strong> {{ $row->district->district_name }}</p>
+                    <p><strong>Upazila(থানা):-</strong> {{ $row->upazila }}</p>
+                    <p><strong>Local Area(ইউনিয়ন):-</strong> {{ $row->local_area }}</p>
+                    <p><a href="tel:{{ $row->phone_number }}" id="card_button">Call Now</a></p>
+                  </div>
+            </div><!-- End colum -->
+            @endforeach
+            {{ $users->links() }}
+        </div><!-- End row -->
+        <!-- END our donar list -->
 
-        <div class="row wow fadeInUp">
+    </div> <!--  end .container -->
 
-            <div class="col-lg-4 col-md-offset-0 col-md-4 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-12">
-
-                <div class="process-layout">
-
-                    <figure class="process-img">
-
-                        <img src="images/process_1.jpg" alt="service" />
-                        <div class="step">
-                            <h3>1</h3>
-                        </div>
-                    </figure> <!-- end .cause-img  -->
-
-                    <article class="process-info">
-                        <h2>Registration</h2>   
-                        <p>You need to complete a very simple registration form. Which contains all required contact information to enter in the donation process.</p>
-                    </article>
-
-                </div> <!--  end .process-layout -->
-
-            </div> <!--  end .col-lg-3 -->
-
-
-
-            <div class="col-lg-4 col-md-offset-0 col-md-4 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-12">
-
-                <div class="process-layout">
-
-                    <figure class="process-img">
-                        <img src="images/process_2.jpg" alt="process" />
-                        <div class="step">
-                            <h3>2</h3>
-                        </div>
-                    </figure> <!-- end .cau<h5 class="step">1</h5>se-img  -->
-
-                    <article class="process-info">                                   
-                        <h2>Screening</h2>
-                        <p>A drop of blood from your finger will take for simple test to ensure that your blood iron levels are proper enough for donation process.</p>
-                    </article>
-
-                </div> <!--  end .process-layout -->
-
-            </div> <!--  end .col-lg-3 -->
-
-
-            <div class="col-lg-4 col-md-offset-0 col-md-4 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-12">
-
-                <div class="process-layout">
-
-                    <figure class="process-img">
-                        <img src="images/process_3.jpg" alt="process" />
-                        <div class="step">
-                            <h3>3</h3>
-                        </div>
-                    </figure> <!-- end .cause-img  -->
-
-                    <article class="process-info">
-                        <h2>Donation</h2>
-                        <p>After ensuring and passed screening test successfully you will be directed to a donor bed for donation. It will take only 6-10 minutes.</p>
-                    </article>
-
-                </div> <!--  end .process-layout -->
-
-            </div> <!--  end .col-lg-3 -->
-
-        </div> <!--  end .row --> 
-
-    </div> <!--  end .container  -->
-
-</section> <!--  end .section-process -->
-
- <!--  SECTION COUNTER   -->
-
- <section class="section-counter"  data-stellar-background-ratio="0.3">
-
-    <div class="container wow fadeInUp">
-
-        <div class="row">
-
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-
-                <div class="counter-block-1 text-center">
-
-                    <i class="fa fa-heartbeat icon"></i>
-                    <span class="counter">2578</span>                            
-                    <h4>Success Smile</h4>
-
-                </div>
-
-            </div> <!--  end .col-lg-3  -->
-
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-
-                <div class="counter-block-1 text-center">
-
-                    <i class="fa fa-stethoscope icon"></i>
-                    <span class="counter">3235</span>                            
-                    <h4>Happy Donors</h4>
-
-                </div>
-
-            </div> <!--  end .col-lg-3  -->
-
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-
-                <div class="counter-block-1 text-center">
-
-                    <i class="fa fa-users icon"></i>
-                    <span class="counter">3568</span>                             
-                    <h4>Happy Recipient</h4>
-
-                </div>
-
-            </div> <!--  end .col-lg-3  -->
-
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-
-                <div class="counter-block-1 text-center">
-
-                    <i class="fa fa-building icon"></i>
-                    <span class="counter">1364</span>                            
-                    <h4>Total Awards</h4>
-
-                </div>
-
-            </div> <!--  end .col-lg-3  -->
-
-
-        </div> <!-- end row  -->
-
-    </div> <!--  end .container  -->
-
-</section> <!--  end .section-counter -->
+</section> <!-- end .section-content-block  -->
 
 <!--  APPOINTMENT SECTION -->
 
@@ -176,53 +93,82 @@
 
         <div class="row">
 
-            <div class="col-lg-6 col-md-6 hidden-sm hidden-xs"> 
-
-                <figure class="appointment-img">
-                    <img src="images/appointment.jpg" alt="appointment image">
-                </figure>
-            </div> <!--  end col-lg-6  -->
-
-
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"> 
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
 
                 <div class="appointment-form-wrapper text-center clearfix">
-                    <h3 class="join-heading">Request Appointment</h3>
-                    <form class="appoinment-form"> 
+                    <h3 class="join-heading">
+                        @if(Session::get('language') == 'english')
+                        {{ $homeTitleSetting->blood_appoirment_en }}
+                        @else
+                        {{ $homeTitleSetting->blood_appoirment_bn }}
+                        @endif
+                    </h3>
+                    <form class="appoinment-form" action="{{ route('blood.request.store') }}" method="POST"> 
+                        @csrf
                         <div class="form-group col-md-6">
-                            <input id="your_name" class="form-control" placeholder="Name" type="text">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <input id="your_email" class="form-control" placeholder="Email" type="email">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <input id="your_phone" class="form-control" placeholder="Phone" type="text">
+                            <input id="your_name" class="form-control" placeholder="Name" type="text" name="name" >
+                            @error('name')
+                              <strong class="text-danger">{{ $message }}</strong>
+                            @enderror
                         </div>
                         <div class="form-group col-md-6">
                             <div class="select-style">                                    
-                                <select class="form-control" name="your_center">
-                                    <option>Donation Center</option>
-                                    <option>Los Angles</option>
-                                    <option>California</option>
+                                <select class="form-control" name="blood_group" required>
+                                    <option>-- Select Blood Group --</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
                                 </select>
                             </div>
+                            @error('blood_group')
+                            <strong class="text-danger">{{ $message }}</strong>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input id="your_phone" class="form-control" placeholder="Phone" type="text" name="phone_number" required>
+                            @error('phone_number')
+                            <strong class="text-danger">{{ $message }}</strong>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input id="your_email" class="form-control" placeholder="Address" type="text" name="address" required>
+                             @error('address')
+                              <strong class="text-danger">{{ $message }}</strong>
+                            @enderror
                         </div>
 
                         <div class="form-group col-md-6">
-                            <input id="your_date" class="form-control" placeholder="Date" type="text">
+                            <input id="your_date" class="form-control" placeholder="Date" type="text" name="date" required>
+                            @error('date')
+                            <strong class="text-danger">{{ $message }}</strong>
+                            @enderror
                         </div>
 
 
                         <div class="form-group col-md-6">
-                            <input id="your_time" class="form-control" placeholder="Time" type="text">
+                            <input id="your_time" class="form-control" placeholder="Time" type="text" name="time" required>
+                            @error('time')
+                            <strong class="text-danger">{{ $message }}</strong>
+                            @enderror
                         </div>
 
                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                            <textarea id="textarea_message" class="form-control" rows="4" placeholder="Your Message..."></textarea>
+                            <textarea name="message" id="textarea_message" class="form-control" rows="4" placeholder="Emergence message for blood..."></textarea>
                         </div>                                                          
 
                         <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                            <button id="btn_submit" class="btn-submit" type="submit">Get Appointment</button>
+                            <button id="btn_submit" class="btn-submit" type="submit">
+                                @if(Session::get('language') == 'english')
+                                {{ $homeTitleSetting->appoirment_button_en }}
+                                @else
+                                {{ $homeTitleSetting->appoirment_button_bn }}
+                                @endif
+                            </button>
                         </div>
 
                     </form>
@@ -236,6 +182,44 @@
     </div> <!--  end .container -->
 
 </section>  <!--  end .appointment-section  -->
+ <!--  SECTION COUNTER   -->
+
+ <section class="section-counter"  data-stellar-background-ratio="0.3">
+
+    <div class="container wow fadeInUp">
+
+        <div class="row">
+        @foreach($home_counts as $row)
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                <div class="counter-block-1 text-center">
+
+                    <i class="{{ $row->icon }} icon"></i>
+                    <span class="counter">
+                     @if(Session::get('language') == 'english')
+                     {{ $row->count_number_en }}
+                     @else
+                     {{ $row->count_number_bn }}
+                     @endif
+                    </span>                            
+                    <h4>
+                     @if(Session::get('language') == 'english')
+                     {{ $row->title_english }}
+                     @else
+                     {{ $row->title_bangla }}
+                     @endif
+                    </h4>
+
+                </div>
+
+            </div> <!--  end .col-lg-3  -->
+        @endforeach
+
+        </div> <!-- end row  -->
+
+    </div> <!--  end .container  -->
+
+</section> <!--  end .section-counter -->
 
 <!--  GALLERY CONTENT  -->
 
@@ -246,8 +230,20 @@
         <div class="row section-heading-wrapper">
 
             <div class="col-md-12 col-sm-12 text-center">
-                <h2 class="section-heading">Photo Gallery</h2>
-                <p class="section-subheading">Campaign photos of different parts of world and our prestigious voluntary work</p>
+                <h2 class="section-heading">
+                    @if(Session::get('language') == 'english')
+                    {{ $homeTitleSetting->gallery_title_en }}
+                    @else
+                    {{ $homeTitleSetting->gallery_title_bn }}
+                    @endif
+                </h2>
+                <p class="section-subheading">
+                    @if(Session::get('language') == 'english')
+                    {{ $homeTitleSetting->gallery_subtitle_en }}
+                    @else
+                    {{ $homeTitleSetting->gallery_subtitle_bn }}
+                    @endif
+                </p>
             </div> <!-- end .col-sm-10  -->                      
 
 
@@ -258,86 +254,16 @@
     <div class="container-fluid wow fadeInUp">
 
         <div class="no-padding-gallery gallery-carousel">
-
-            <a class="gallery-light-box xs-margin" data-gall="myGallery" href="images/gallery_1.jpg">
+        @foreach($photo_gallery as $row)
+            <a class="gallery-light-box xs-margin" data-gall="myGallery" href="{{ asset('Backend/assets/media/photoGallery/'. $row->photo_gallery) }}">
 
                 <figure class="gallery-img">
 
-                    <img src="images/gallery_1.jpg" alt="gallery image" />
+                    <img src="{{ asset('Backend/assets/media/photoGallery/'. $row->photo_gallery) }}" alt="gallery image" />
 
                 </figure> <!-- end .cause-img  -->
-
+        @endforeach
             </a> <!-- end .gallery-light-box  -->
-
-            <a class="gallery-light-box xs-margin"  data-gall="myGallery" href="images/gallery_2.jpg">
-
-                <figure class="gallery-img">
-
-                    <img src="images/gallery_2.jpg" alt="gallery image" />
-
-                </figure> <!-- end .cause-img  -->
-
-            </a>
-
-            <a class="gallery-light-box xs-margin" data-gall="myGallery" href="images/gallery_3.jpg">
-
-                <figure class="gallery-img">
-
-                    <img src="images/gallery_3.jpg" alt="gallery image" />
-
-                </figure> <!-- end .cause-img  -->
-
-            </a> <!-- end .gallery-light-box  -->
-
-            <a class="gallery-light-box xs-margin"  data-gall="myGallery" href="images/gallery_4.jpg">
-
-                <figure class="gallery-img">
-
-                    <img src="images/gallery_4.jpg" alt="gallery image" />
-
-                </figure> <!-- end .cause-img  -->
-
-            </a>
-
-            <a class="gallery-light-box xs-margin" data-gall="myGallery" href="images/gallery_5.jpg">
-
-                <figure class="gallery-img">
-
-                    <img src="images/gallery_5.jpg" alt="gallery image" />
-
-                </figure> <!-- end .cause-img  -->
-
-            </a> <!-- end .gallery-light-box  -->
-
-            <a class="gallery-light-box xs-margin"  data-gall="myGallery" href="images/gallery_6.jpg">
-
-                <figure class="gallery-img">
-
-                    <img src="images/gallery_6.jpg" alt="gallery image" />
-
-                </figure> <!-- end .cause-img  -->
-
-            </a>
-
-            <a class="gallery-light-box xs-margin" data-gall="myGallery" href="images/gallery_7.jpg">
-
-                <figure class="gallery-img">
-
-                    <img src="images/gallery_8.jpg" alt="gallery image" />
-
-                </figure> <!-- end .cause-img  -->
-
-            </a> <!-- end .gallery-light-box  -->
-
-            <a class="gallery-light-box xs-margin"  data-gall="myGallery" href="images/gallery_8.jpg">
-
-                <figure class="gallery-img">
-
-                    <img src="images/gallery_7.jpg" alt="gallery image" />
-
-                </figure> <!-- end .cause-img  -->
-
-            </a>
 
         </div> <!-- end .row  -->
 
@@ -354,9 +280,19 @@
         <div class="row section-heading-wrapper">
 
             <div class="col-md-12 col-sm-12 text-center">
-                <h2 class="section-heading">Recent Blog</h2>
+                <h2 class="section-heading">
+                    @if(Session::get('language') == 'english')
+                    {{ $homeTitleSetting->blog_title_en }}
+                    @else
+                    {{ $homeTitleSetting->blog_title_bn }}
+                    @endif
+                </h2>
                 <p class="section-subheading">
-                    Latest news and statements regarding giving blood, blood processing and supply.
+                    @if(Session::get('language') == 'english')
+                    {{ $homeTitleSetting->blog_subtitle_en }}
+                    @else
+                    {{ $homeTitleSetting->blog_subtitle_bn }}
+                    @endif
                 </p>
             </div> <!-- end .col-md-12  -->
 

@@ -26,7 +26,7 @@
 <body> 
 
     <div id="preloader">
-        <span class="margin-bottom"><img src="images/loader.gif" alt="" /></span>
+        <span class="margin-bottom"><img src="{{ asset('Frontend/assets') }}/images/loader.gif" alt="" /></span>
     </div>
 
     <!-- Header -->
@@ -102,7 +102,7 @@
                         $('#show_area').show();
                         var html = "";
                         $.each(data, function(key, v){
-                            html+= "<tr><td>"+v.local_area+"<td></tr>";
+                            html+= "<tr><td>"+v.name+"<td></tr>";
                         });
                         $('#area_value').html(html);  
                         console.log(data); 
@@ -125,16 +125,36 @@
                     url: "{{ route('search.district.show') }}",
                     type: "GET",
                     data: {divition_id:divition_id},
-                    success:function(data){
-                       var html = '<option value"">-- Select Your District --</option>';
-                       $.each(data, function(key, v){
-                          html+= '<option value"'+v.district_name+'">'+v.district_name+'</option>';
-                       });
+                    success:function(data) {
+                        var html = '<option value=""> -- Select Your District -- </option>';
+                        $.each(data, function(key, v){
+                            html+= '<option value="'+v.id+'">'+v.district_name+'</option>';
+                        });
                        $('.district').html(html);
                     }
                 });
              });
          });
     </script>
+<!-- Show Upazila For search & Register Filed ----->
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $(document).on('change', '.district', function(){
+            var district_id = $(this).val();
+            $.ajax({
+               url: "{{ route('show.upazila') }}",
+               type: "GET",
+               data: {district_id:district_id},
+               success:function(data){
+                  var html = '<option value="">-- Select Your Upazila --</option>';
+                  $.each(data, function(key, v){
+                      html+= '<option value="'+v.upazila+'">'+v.upazila+'</option>';
+                  });
+                  $('.upazila').html(html);
+               }
+            });
+        });
+   }); 
+</script> 
 </body>
 </html>

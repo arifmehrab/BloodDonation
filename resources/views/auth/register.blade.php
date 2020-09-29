@@ -111,8 +111,8 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label for="district" class="text-light">District (জেলা)*</label><br>
-                            <select name="district" id="district" class="form-control" required>
-                               
+                            <select name="district" id="district" class="form-control district" required>
+                                
                             </select>
                             @error('district')
                             <span class="invalid-feedback" role="alert">
@@ -127,12 +127,14 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">
                             <label for="upazila" class="text-light">Upazila (থানা)*</label><br>
-                            <input type="text" class="form-control" id="upazila" name="upazila" required>
-                                @error('upazila')
-                                <span class="invalid-feedback" role="alert">
+                            <select name="upazila" id="upazila" class="form-control upazila" required>
+                               
+                            </select>
+                            @error('upazila')
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                            </span>
+                            @enderror
                         </div>
                     </div><!-- end colum -->
                     <div class="col-md-6 col-sm-6">
@@ -191,5 +193,5 @@
            });
         });
     });
-</script>    
+</script>   
 @endpush

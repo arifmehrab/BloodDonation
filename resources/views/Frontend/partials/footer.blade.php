@@ -1,5 +1,8 @@
  <!-- START FOOTER  -->
-
+@php
+    $footer_title = App\Models\home_title_setting::select('newsletter_summery_en', 'newsletter_summery_bn', 'about_text_en', 'about_text_bn')->first();
+    $footer_setting = App\Models\setting::select('email', 'phone_number', 'address', 'copyright')->first();
+@endphp
  <footer>            
 
     <section class="footer-widget-area footer-widget-area-bg">
@@ -8,48 +11,36 @@
 
             <div class="row">
 
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-                    <div class="about-footer">
-
-                        <div class="row">
-
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                <img src="images/logo-footer.png" alt="" />
-                            </div> <!--  end col-lg-3-->
-
-                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                <p>
-                                    We are world largest and trustful blood donation center. We have been working since 1973 with a prestigious vision to helping patient to provide blood.
-                                    We are working all over the world, organizing blood donation campaign to grow awareness among the people to donate blood.
-                                </p>
-                            </div> <!--  end .col-lg-9  -->
-
-                        </div> <!--  end .row -->
-
-                    </div> <!--  end .about-footer  -->
-
-                </div> <!--  end .col-md-12  -->
-
-            </div> <!--  end .row  -->
-
-            <div class="row">
-
                 <div class="col-md-4 col-sm-6 col-xs-12">
 
                     <div class="footer-widget">
                         <div class="sidebar-widget-wrapper">
                             <div class="footer-widget-header clearfix">
+                                @if(Session::get('language') == 'english')
                                 <h3>Subscribe Us</h3>
+                                @else
+                                <h3>সাবস্ক্রাইব করুন</h3>
+                                @endif
                             </div>
-                            <p>Signup for regular newsletter and stay up to date with our latest news.</p>
+                            @if(Session::get('language') == 'english')
+                            <p>
+                               {{ $footer_title->newsletter_summery_en }}
+                            </p>
+                            @else
+                            <p>
+                                {{ $footer_title->newsletter_summery_bn }}
+                             </p>
+                            @endif
                             <div class="footer-subscription">
-                                <p>
-                                    <input id="mc4wp_email" class="form-control" required="" placeholder="Enter Your Email" name="EMAIL" type="email">
-                                </p>
-                                <p>
-                                    <input class="btn btn-default" value="Subscribe Now" type="submit">
-                                </p>
+                                <form action="{{ route('subscriber.store') }}" method="POST">
+                                    @csrf
+                                    <p>
+                                        <input id="mc4wp_email" class="form-control" required="" placeholder="Enter Your Email" name="email" type="email">
+                                    </p>
+                                    <p>
+                                        <input class="btn btn-default" value="Subscribe Now" type="submit">
+                                    </p>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -63,17 +54,21 @@
                         <div class="sidebar-widget-wrapper">
 
                             <div class="footer-widget-header clearfix">
-                                <h3>Contact Us</h3>
+                                @if(Session::get('language') == 'english')
+                                <h3>CONTACT US</h3>
+                                @else
+                                <h3>যোগাযোগ করুন</h3>
+                                @endif
                             </div>  <!--  end .footer-widget-header --> 
 
 
                             <div class="textwidget">                                       
 
-                                <i class="fa fa-envelope-o fa-contact"></i> <p><a href="#">support@donation.com</a><br/><a href="#">helpme@donation.com</a></p>
+                                <i class="fa fa-envelope-o fa-contact"></i> <p><a href="#">{{ $footer_setting->email }}</a></p>
 
-                                <i class="fa fa-location-arrow fa-contact"></i> <p>Road-2,3/A East Shibgonj<br/>Sylhet-3100, Bangladesh</p>
+                                <i class="fa fa-location-arrow fa-contact"></i> <p>{{ $footer_setting->address }}</p>
 
-                                <i class="fa fa-phone fa-contact"></i> <p>Office:&nbsp; (+880) 0823 560 433<br/>Cell:&nbsp; (+880) 0723 161 343</p>                              
+                                <i class="fa fa-phone fa-contact"></i> <p>{{ $footer_setting->phone_number }}</p>                              
 
                             </div>
 
@@ -90,42 +85,17 @@
                         <div class="sidebar-widget-wrapper">
 
                             <div class="footer-widget-header clearfix">
-                                <h3>Support Links</h3>
+                                @if(Session::get('language') == 'english')
+                                <h3>ABOUT US</h3>
+                                @else
+                                <h3>আমাদের সম্পর্কে</h3>
+                                @endif
                             </div>  <!--  end .footer-widget-header --> 
-
-
-                            <ul class="footer-useful-links">
-
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-caret-right fa-footer"></i>
-                                        Myelodysasia
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-caret-right fa-footer"></i>
-                                        Blood Count
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-caret-right fa-footer"></i>
-                                        Hemolytimia
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-caret-right fa-footer"></i>
-                                        Ychromas Eosis 
-                                    </a>
-                                </li>                    
-
-                            </ul>
-
+                            @if(Session::get('language') == 'english')
+                            <p>{{ $footer_title->about_text_en }}</p>
+                            @else
+                            <p>{{ $footer_title->about_text_bn }}</p>
+                            @endif
                         </div> <!--  end .footer-widget  -->        
 
                     </div> <!--  end .footer-widget  -->            
@@ -147,7 +117,7 @@
             <div class="row clearfix">
 
                 <div class="col-md-6 col-sm-12">
-                    <p class="copyright-text"> Copyright © 2017, All Right Reserved - by xenioushk </p>
+                    <p class="copyright-text">{{ $footer_setting->copyright }}</p>
 
                 </div>  <!-- end .col-sm-6  -->
 
@@ -156,14 +126,14 @@
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="index.html">Trams & condition</a>
+                                    <a href="index.html">Terms of Service</a>
                                 </li>
                                 <li>
                                     <a href="#">Privacy Policy</a>
                                 </li>   
                                 <li>
-                                    <a href="#">Contact Us</a>
-                                </li>   
+                                    <a href="#">DMCA / Copyrights Disclaimer</a>
+                                </li> 
                             </ul>
                         </nav>
                     </div> <!--  end .footer-nav  -->

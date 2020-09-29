@@ -71,9 +71,6 @@
                 <td>{{ $key+1 }}</td>
                 <td>{{ $row->divition_name }}</td>
                 <td>
-                    <a title="Edit" class="btn btn-success btn-sm" href="">
-                        <i class="fa fa-edit"></i>
-                    </a>
                       <button title="Delete" type="button" class="btn btn-danger btn-sm" onclick="deleteItem({{ $row->id }})">
                           <i class="fa fa-trash"></i>
                       </button>
