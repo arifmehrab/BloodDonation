@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 // =====================================================================
 // Auth
 Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 // pages Route Here
 Route::get('/', 'Frontend\FrontendController@index');
 // About Us
@@ -28,7 +30,14 @@ Route::get('/blood-summary', 'Frontend\FrontendController@bloodSummary')->name('
 // Donation page
 Route::get('/donation', 'Frontend\FrontendController@donation')->name('blood.donation');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Post Route Here =======================
+Route::get('/posts', 'Frontend\FrontendController@posts')->name('blood.post');
+Route::get('/post/{slug}', 'Frontend\FrontendController@postView')->name('blood.post.view');
+
+// category wais post
+Route::get('/category/{slug}', 'Frontend\FrontendController@categoryPost')->name('blood.category.post');
+// Post Search 
+Route::post('/post/search', 'Frontend\FrontendController@postSearch')->name('blood.post.search');
 
 // Show District By Ajax For Register 
 Route::get('/show/destrict', 'Frontend\FrontendController@showDestrict')->name('show.destrict');
@@ -95,6 +104,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
     Route::put('/upazila/update/{id}', 'UpazilaController@update')->name('upazila.update');
     Route::delete('/upazila/destory/{id}', 'UpazilaController@destory')->name('upazila.destory');
 
+    // Post Route Here =======================
+    Route::resource('category', 'CategoryController');
+    Route::resource('post', 'PostController');
+    Route::get('/post/pending/list','PostController@postPending')->name('post.pending.list');
+	Route::put('/post/approve/{id}','PostController@postApprove')->name('post.approve');
+
     // Our Team Member Route Here =============
     Route::get('/team-member', 'TeamMemberController@index')->name('team.member'); 
     Route::post('/team-member/store', 'TeamMemberController@store')->name('team.member.store'); 
@@ -158,4 +173,13 @@ Route::group(['prefix' => 'user', 'namespace' => 'User', 'as' => 'user.', 'middl
     // password change
     Route::get('/password/change', 'ProfileController@PasswordChange')->name('password.change');
     Route::post('/password/update', 'ProfileController@PasswordUpdate')->name('password.update');
+
+    // Photo Gallery 
+    Route::get('/photo/gallery', 'PhotoGalleryController@photoGallery')->name('photo.gallery');
+    Route::get('/photo/upload', 'PhotoGalleryController@photoGalleryCreate')->name('photo.gallery.create');
+    Route::post('/photo/gallery/store', 'PhotoGalleryController@photoGalleryStore')->name('photo.gallery.store');
+    Route::delete('/photo/gallery/delete/{id}', 'PhotoGalleryController@photoGalleryDelete')->name('photo.gallery.delete');
+    
+    // Post Route Here =======================
+    Route::resource('post', 'PostController');
 });

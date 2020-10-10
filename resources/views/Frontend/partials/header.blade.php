@@ -2,6 +2,7 @@
 $headerT_top_title = App\Models\homesettingone::select('header_top_title_en', 'header_top_title_bn')->first();
 $top_donation_button = App\Models\home_title_setting::select('donation_button_en', 'donation_button_bn')->first();
 $settings = App\Models\setting::select('logo', 'facebook_url', 'twitter_url', 'youtube_url')->first();
+$blog_categories = App\Models\category::all();
 @endphp
 <!--  HEADER -->
 <header class="main-header clearfix">
@@ -85,11 +86,20 @@ $settings = App\Models\setting::select('logo', 'facebook_url', 'twitter_url', 'y
                             <a href="{{ route('blood.summary') }}">Blood Summary</a>
                         </li>
 
-                        <li>
-                            <a href="#">Blog</a>
+                        <li class="drop"><a href="{{ route('blood.post') }}">Blog Post</a>
                             <ul class="drop-down">
-                                <li><a href="blog.html">All Posts</a></li> 
+
+
+                                <li><a href="{{ route('blood.post') }}" title="all post">All Post</a></li>
+                                <li class="drop"><a href="#">Categories</a>
+                                    <ul class="drop-down level3">
+                                        @foreach($blog_categories as $row)
+                                        <li><a href="{{ route('blood.category.post', $row->category_slug) }}">{{ $row->category_name }}</a></li> 
+                                        @endforeach
+                                    </ul>
+                                </li>
                             </ul>
+                        </li>
                         </li>
                         @guest
                         <li>

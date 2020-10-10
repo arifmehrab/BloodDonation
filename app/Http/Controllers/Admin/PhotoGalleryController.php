@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\photogallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Image;
 class PhotoGalleryController extends Controller
 {
@@ -16,6 +17,8 @@ class PhotoGalleryController extends Controller
     }
     public function photoGalleryStore(Request $request)
     {
+        // user
+        $user = Auth::id();
         // validation
         $request->validate([
             'gallery_image' => 'required|image|mimes:jpg,png,jpeg,gif|max:3072'
@@ -26,6 +29,7 @@ class PhotoGalleryController extends Controller
             $photo_gallery = hexdec(uniqid()) . '.' . $request->gallery_image->getClientOriginalExtension();
             Image::make($request->gallery_image)->resize(550, 407)->save('Backend/assets/media/photoGallery/' . $photo_gallery);
             $admin_gallery_image->photo_gallery = $photo_gallery;
+            $admin_gallery_image->user_id = $user;
             $admin_gallery_image->save();
         }
          // Notification

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    {!! SEO::generate() !!}
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -55,7 +55,7 @@
     <script src="{{ asset('Backend/assets/toster-js/js/toastr.js') }}"></script>
     <!-- Sweet-Alert  -->
     <script src="{{ asset('Backend/assets/vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
-    <script src="{{ asset('Backend/assets/vendor/sweetalert2/sweet-alert.init.js') }}"></script>
+    <script src="{{ asset('Backend/assets/vendor/sweetalert2/sweet-alert.init.js') }}"></script>>
     @stack('js')    
      <!--- Toastr Message --->
     <script>
@@ -156,5 +156,42 @@
         });
    }); 
 </script> 
+    <!--- Sweet-Alert --->
+    <script type="text/javascript">
+        function logoutUser(){
+            const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'mr-2 btn btn-danger'
+                    },
+                    buttonsStyling: false,
+                })
+
+                swalWithBootstrapButtons.fire({
+                    title: 'Are you sure?',
+                    text: "You Want to Logout!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, Logoout!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        event.preventDefault();
+                        document.getElementById('logoutUser_form').submit();
+                    } else if (
+                        // Read more about handling dismissals
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire(
+                            'Cancelled',
+                            'Saved Logout :)',
+                            'error'
+                        )
+                    }
+                })
+        }
+
+    </script>
 </body>
 </html>

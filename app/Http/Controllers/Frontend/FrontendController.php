@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\bloodrequest;
 use App\Models\bloodsummary;
+use App\Models\category;
 use App\Models\district;
 use App\Models\divition;
 use App\Models\homesettingone;
@@ -12,17 +13,32 @@ use App\Models\home_title_setting;
 use App\Models\homecountdown;
 use App\Models\ourteam;
 use App\Models\photogallery;
+use App\Models\seosetting;
 use App\Models\subscriber;
 use App\Models\upazila;
 use App\User;
-use Illuminate\Http\Request;
+use App\Models\post;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\OpenGraph;
 use Session;
+use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
     // Front Page
     public function index()
     {
+        // Seo Meta
+        $seo = seosetting::first();
+        SEOMeta::setTitle($seo->meta_title);
+        SEOMeta::setDescription($seo->meta_description);
+
+        OpenGraph::setDescription($seo->meta_description);
+        OpenGraph::setTitle($seo->meta_title);
+        OpenGraph::setUrl('http://current.url.com');
+        OpenGraph::addProperty('type', 'articles');
+
+        // Divitions
         $divitions = divition::all();
         $users     = User::orderBy('id', 'DESC')->paginate(4);
         // Home settings
@@ -30,7 +46,9 @@ class FrontendController extends Controller
         $homeTitleSetting = home_title_setting::first();
         $photo_gallery    = photogallery::select('photo_gallery')->orderBy('id', 'DESC')->get();
         $home_counts = homecountdown::all();
-        return view('Frontend.index', compact('divitions', 'users', 'homeSettingOne', 'homeTitleSetting', 'photo_gallery', 'home_counts'));
+        // Post
+        $posts = post::where('status', 1)->latest()->take(3)->get();
+        return view('Frontend.index', compact('divitions', 'users', 'homeSettingOne', 'homeTitleSetting', 'photo_gallery', 'home_counts', 'posts'));
     }
     // About Us ======================
     public function aboutUs()
@@ -44,6 +62,81 @@ class FrontendController extends Controller
     {
         $blood_summary = bloodsummary::first();
         return view('Frontend.pages.blood_summary', compact('blood_summary'));
+    }
+    // posts Page ====================
+    public function posts()
+    {
+        // Seo Meta
+        $seo = seosetting::first();
+        SEOMeta::setTitle($seo->meta_title);
+        SEOMeta::setDescription($seo->meta_description);
+
+        OpenGraph::setDescription($seo->meta_description);
+        OpenGraph::setTitle($seo->meta_title);
+        OpenGraph::setUrl('http://current.url.com');
+        OpenGraph::addProperty('type', 'articles');
+        // categories
+        $categories = category::all();
+        // Posts
+        $posts = post::where('status', 1)->latest()->paginate(5);
+        $related_post = post::where('status', 1)->latest()->take(5)->get();
+
+        return view('Frontend.pages.posts', compact('posts', 'categories', 'related_post'));
+    }
+    // Post Details ===================
+    public function postView($slug)
+    {
+        // single post
+        $postDetails = post::where('slug', $slug)->where('status', 1)->first();
+        // Categories
+        $catPost = $postDetails->categories()->where('status', 1)->get();
+        $categories = category::all();
+        // Latest Post 
+        $latest_post = post::where('status', 1)->latest()->take(5)->get();
+        // Related Post 
+        $related_post = post::inRandomOrder()->limit(5)->get();
+        // View count
+        $postkey = 'postkey_'.$postDetails->id;
+        if(!Session::has($postkey)) {
+            $postDetails->increment('view_count');
+            Session::put($postkey, 1);
+        }
+        // Seo Meta
+        SEOMeta::setTitle($postDetails->title);
+        SEOMeta::setDescription($postDetails->body);
+        SEOMeta::addMeta('article:published_time', $postDetails->date, 'property');
+        foreach($catPost as $cpost) {
+        SEOMeta::addMeta('article:section', $cpost->category_name, 'property');
+        }
+        SEOMeta::addKeyword($postDetails->tags);
+
+        OpenGraph::setDescription($postDetails->body);
+        OpenGraph::setTitle($postDetails->title);
+        OpenGraph::setUrl('http://current.url.com');
+        OpenGraph::addProperty('type', 'article');
+        OpenGraph::addProperty('locale', 'pt-br');
+        OpenGraph::addProperty('locale:alternate', ['pt-pt', 'en-us']);
+        // view
+       return view('Frontend.pages.post_details', compact('postDetails', 'categories', 'catPost', 'latest_post', 'related_post'));
+    }
+    // Category wais post ==============
+    public function categoryPost($slug)
+    {
+        $categories = category::all();
+        $related_post = post::where('status', 1)->latest()->take(5)->get();
+        $category = category::where('category_slug', $slug)->where('status', 1)->first();
+        $catPost = $category->posts()->where('status', 1)->latest()->paginate(10);
+        return view('Frontend.pages.category_post', compact('category', 'catPost', 'categories', 'related_post'));
+    }
+    // Post Search =====================
+    public function postSearch(Request $request)
+    {
+        $categories = category::all();
+        $related_post = post::where('status', 1)->latest()->take(5)->get();
+        $searchValue = $request->search;
+        $searchResuit = post::where('title','LIKE', "%$searchValue%")->where('status', 1)->get();
+        return view('Frontend.pages.post_search_resuit', compact('searchValue', 'searchResuit', 'categories', 'related_post'));
+
     }
     // Show Destrict By ajax in Resister Form ============
     public function showDestrict(Request $request)

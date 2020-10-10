@@ -64,6 +64,7 @@
               <thead class="thead-light">
                 <tr>
                   <th>SL.</th>
+                  <th>User</th>
                   <th>Image</th>
                   <th>Action</th>
                 </tr>
@@ -72,6 +73,7 @@
               @foreach($photo_gallery as $key => $row)
                 <tr>
                   <td>{{ $key+1 }}</td>
+                  <td>{{ $row->user->name }}</td>
                   <td>
                       <img src="{{ asset('Backend/assets/media/photoGallery/'. $row->photo_gallery) }}" alt="$row->photo_gallery" width="100">
                   </td>

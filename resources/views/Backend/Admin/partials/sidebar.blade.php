@@ -28,16 +28,34 @@
               <span class="nav-link-text">Dashboard</span>
             </a>
             @endif
-            @if(Request::is('user*'))
-            <a class="nav-link" href="{{ route('user.dashboard') }}">
-              <i class="ni ni-shop text-primary"></i>
-              <span class="nav-link-text">Dashboard</span>
-            </a>
-            @endif
           </li> 
         <!----------------- Admin Sidevar Here --------------------
          --------------------------------------------------------->   
-        @if(Request::is('admin*'))        
+        @if(Request::is('admin*'))  
+        
+        <li class="nav-item">
+          <a class="nav-link" href="#post" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+            <i class="fa fa-list"></i>
+            <span class="nav-link-text">Blogs</span>
+          </a>
+          <div class="collapse collapse-show" id="post">
+            <ul class="nav nav-sm flex-column">
+              <li class="nav-item">
+                <a href="{{ route('admin.category.index') }}" class="nav-link active">Categories</a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.post.create') }}" class="nav-link">Add Post</a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.post.index') }}" class="nav-link">All Post</a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.post.pending.list') }}" class="nav-link">Pending Post</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
           <li class="nav-item">
             <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
               <i class="ni ni-bag-17 text-orange"></i>

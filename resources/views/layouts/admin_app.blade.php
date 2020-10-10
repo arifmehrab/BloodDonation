@@ -72,6 +72,10 @@
   <script src="{{ asset('Backend/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
   <script src="{{ asset('Backend/assets/vendor/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
   <script src="{{ asset('Backend/assets/vendor/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+   <!-- Optional JS -->
+    <script src="{{ asset('Backend/assets/vendor/quill/dist/quill.min.js') }}"></script>
+    <script src="{{ asset('Backend/assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
+    <script src="{{ asset('Backend/assets/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
   <!-- Argon JS -->
   <script src="{{ asset('Backend/assets/js/argon.js?v=1.1.0') }}"></script>
   <!--- Toastr js Start --->
@@ -155,7 +159,7 @@
         jQuery(document).ready(function() {
     
             $('.summernote').summernote({
-                height: 350, // set editor height
+                height: 250, // set editor height
                 minHeight: null, // set minimum height of editor
                 maxHeight: null, // set maximum height of editor
                 focus: false // set focus to editable area after initializing summernote
@@ -173,6 +177,6 @@
             window.save = function() {
                 $(".click2edit").summernote('destroy');
             }
-        </script>
+    </script>
 </body>
 </html>

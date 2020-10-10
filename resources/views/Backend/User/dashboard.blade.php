@@ -29,7 +29,11 @@
 				<!-- SIDEBAR BUTTONS -->
 				<div class="profile-userbuttons">
 					<a href="{{ route('user.dashboard') }}" type="button" class="btn btn-primary btn-sm">Home</a>
-					<a href="{{ route('user.dashboard.logout') }}" type="button" class="btn btn-danger btn-sm">Logout</a>
+					<button title="Logout" type="button" class="btn btn-danger btn-sm" onclick="logoutUser()">
+						Logout
+					</button>
+					<form style="display: none;" id="logoutUser_form" method="get" action="{{ route('user.dashboard.logout') }}">
+				  </form>
 				</div>
 				<!-- END SIDEBAR BUTTONS -->
 				<!-- SIDEBAR MENU -->
@@ -70,11 +74,12 @@
 				<hr>
 				<div>
 					<p>রক্ত কৃত্তিমভাবে তৈরী করা যায় না, শুধুমাত্র একজন মানুষই পারে আরেকজন মানুষকে বাঁচাতে। কিন্তু দুঃখের ব্যাপার, প্রতিবছর বহুসংখ্যক মানুষ মারা যাচ্ছে জরুরি মুহুর্তে প্রয়োজনীয় রক্তের অভাবে। বর্তমানে বাংলাদেশে প্রতি বছর রক্তের প্রয়োজন মাত্র ৯ লাখ ব্যাগ। অথচ জনবহুল এই দেশে এখনো মানুষ মারা যাচ্ছে রক্তের অভাবে। রক্তের এই চাহিদা খুব সহজেই পূরণ করা সম্ভব হবে যদি আমাদের দেশের সকল প্রান্তের পূর্ণবয়স্ক মানুষদের।</p>
-					<a class="btn btn-info" href="">ADD POST</a>/ 
-					<a class="btn btn-success" href="">ALL POST</a>
+					<a class="btn btn-success" href="{{ route('user.photo.gallery') }}">All PHOTO</a> /
+					<a class="btn btn-primary" href="{{ route('user.photo.gallery.create') }}">ADD PHOTO</a>
 					<hr>
 					<p>রক্ত কৃত্তিমভাবে তৈরী করা যায় না, শুধুমাত্র একজন মানুষই পারে আরেকজন মানুষকে বাঁচাতে। কিন্তু দুঃখের ব্যাপার, প্রতিবছর বহুসংখ্যক মানুষ মারা যাচ্ছে জরুরি মুহুর্তে প্রয়োজনীয় রক্তের অভাবে। বর্তমানে বাংলাদেশে প্রতি বছর রক্তের প্রয়োজন মাত্র ৯ লাখ ব্যাগ। অথচ জনবহুল এই দেশে এখনো মানুষ মারা যাচ্ছে রক্তের অভাবে। রক্তের এই চাহিদা খুব সহজেই পূরণ করা সম্ভব হবে যদি আমাদের দেশের সকল প্রান্তের পূর্ণবয়স্ক মানুষদের।</p>
-					<a class="btn btn-primary" href="">ADD PHOTO</a>
+					<a class="btn btn-info" href="{{ route('user.post.create') }}">ADD POST</a>/ 
+					<a class="btn btn-success" href="{{ route('user.post.index') }}">ALL POST</a>
 				</div>
             </div>
 		</div>

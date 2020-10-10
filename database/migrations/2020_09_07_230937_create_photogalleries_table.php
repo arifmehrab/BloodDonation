@@ -15,6 +15,7 @@ class CreatePhotogalleriesTable extends Migration
     {
         Schema::create('photogalleries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable();
             $table->string('photo_gallery')->nullable();
             $table->timestamps();
         });

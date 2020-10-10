@@ -29,7 +29,11 @@
 				<!-- SIDEBAR BUTTONS -->
 				<div class="profile-userbuttons">
                     <a href="{{ route('user.dashboard') }}" type="button" class="btn btn-primary btn-sm">Home</a>
-					<a href="{{ route('user.dashboard.logout') }}" type="button" class="btn btn-danger btn-sm">Logout</a>
+					<button title="Logout" type="button" class="btn btn-danger btn-sm" onclick="logoutUser()">
+						Logout
+					</button>
+					<form style="display: none;" id="logoutUser_form" method="get" action="{{ route('user.dashboard.logout') }}">
+				    </form>
 				</div>
 				<!-- END SIDEBAR BUTTONS -->
 				<!-- SIDEBAR MENU -->
