@@ -293,3 +293,8 @@ i.fa.fa-user {
   background: #fff;
   min-height: 460px;
 }
+/* donation page css */
+.donation_bg {
+background: #dedede;
+padding: 25px 25px;
+}

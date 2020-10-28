@@ -31,6 +31,10 @@ class HomeSettingController extends Controller
         $homeSettingOne->donar_regi_subtitle_bn = $request->donar_regi_subtitle_bn;
         $homeSettingOne->donar_regi_button_en   = $request->donar_regi_button_en;
         $homeSettingOne->donar_regi_button_bn   = $request->donar_regi_button_bn;
+        $homeSettingOne->site_video_link        = $request->site_video_link;
+        $homeSettingOne->user_title             = $request->user_title;
+        $homeSettingOne->user_gallery_title     = $request->user_gallery_title;
+        $homeSettingOne->user_post_title        = $request->user_post_title;
         $homeSettingOne->save();
         // Notification
         $notification = array(
@@ -95,39 +99,5 @@ class HomeSettingController extends Controller
         );
         return redirect()->back()->with($notification);
     }
-    // Admin Countdown setting ================
-    public function countDownSetting()
-    {
-        $countDowns = homecountdown::all();
-        return view('Backend.Admin.settings.home_countdown', compact('countDowns'));
-    }
-    // Admin countdown store ==================
-    public function countDownStore(Request $request)
-    {
-        $home_countdown                  = new homecountdown();
-        $home_countdown->icon            = $request->icon;
-        $home_countdown->count_number_en = $request->count_number_en;
-        $home_countdown->count_number_bn = $request->count_number_bn;
-        $home_countdown->title_english   = $request->title_english;
-        $home_countdown->title_bangla    = $request->title_bangla;
-        $home_countdown->save();
-        // Notification
-        $notification = array(
-            'message'    => 'CountDown Added Successfully',
-            'alert-type' => 'success',
-        );
-        return redirect()->back()->with($notification);
-    }
-    // Admin Countdown Delete ===============
-    public function countDownDelete($id)
-    {
-        $countDown_delete = homecountdown::find($id);
-        $countDown_delete->delete();
-         // Notification
-         $notification = array(
-            'message'    => 'CountDown Deleted Successfully',
-            'alert-type' => 'success',
-        );
-        return redirect()->back()->with($notification);
-    }
+   
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\category;
 use App\Models\post;
 use Auth;
+use Image;
 class PostController extends Controller
 {
    /**
@@ -18,8 +19,8 @@ class PostController extends Controller
     {
         // index
         $user_id = Auth::id();
-        $user_aproved_post = post::where('user_id', $user_id)->where('status', 1)->latest()->get();
-        $user_pending_post = post::where('user_id', $user_id)->where('status', 0)->latest()->get();
+        $user_aproved_post = post::where('user_id', $user_id)->where('status', 1)->orderBy('id', 'DESC')->paginate(10);
+        $user_pending_post = post::where('user_id', $user_id)->where('status', 0)->orderBy('id', 'DESC')->get();
         return view('Backend.User.post.index', compact('user_aproved_post', 'user_pending_post'));
     }
 
@@ -59,11 +60,10 @@ class PostController extends Controller
             'tags'       => 'required',
             'image'      => 'required|image|mimes:jpg,png,jpeg,gif|max:4072',
         ]);
-        //Image Check
-        if ($request->hasFile('image')) {
+         //Image Check
+         if($request->hasFile('image')) {
             $thumbnails_image = hexdec(uniqid()) . '.' . $request->image->getClientOriginalExtension();
-            $imagePath        = public_path('/Backend/assets/media/posts/');
-            $request->image->move($imagePath, $thumbnails_image);
+            Image::make($request->image)->resize(950, 650)->save('Backend/assets/media/posts/' . $thumbnails_image);
         }
         // post Store database
         $userId        = Auth::user()->id;
@@ -140,11 +140,10 @@ class PostController extends Controller
         // update post
         $postUpdate = post::find($id);
          //Image Update
-         if ($request->hasFile('image')) {
+         if($request->hasFile('image')) {
             @unlink(public_path('/Backend/assets/media/posts/'.$postUpdate->image));
             $thumbnails_image = hexdec(uniqid()) . '.' . $request->image->getClientOriginalExtension();
-            $imagePath        = public_path('/Backend/assets/media/posts/');
-            $request->image->move($imagePath, $thumbnails_image);
+            Image::make($request->image)->resize(950, 650)->save('Backend/assets/media/posts/' . $thumbnails_image);
             $postUpdate->image = $thumbnails_image;
         }
         $userId        = Auth::user()->id;

@@ -105,9 +105,6 @@
                 <li class="nav-item">
                   <a href="{{ route('admin.setting.title') }}" class="nav-link active">Hom Page Title Setting</a>
                 </li>
-                <li class="nav-item">
-                  <a href="{{ route('admin.count.down.setting') }}" class="nav-link active">Hom Page CountDown Setting</a>
-                </li>
               </ul>
             </div>
           </li>
@@ -184,6 +181,20 @@
               <i class="ni ni-bell-55 text-red"></i>
               <span class="nav-link-text">Sebseriber</span>
             </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#adsense" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="adsense">
+              <i class="ni ni-world text-primary"></i>
+              <span class="nav-link-text">Adsense Pages Setting</span>
+            </a>
+            <div class="collapse collapse-show" id="adsense">
+              <ul class="nav nav-sm flex-column">
+                <li class="nav-item">
+                  <a href="{{ route('admin.adsense.page') }}" class="nav-link active">Adsense page Content</a>
+                </li>
+              </ul>
+            </div>
           </li>
 
         </ul>

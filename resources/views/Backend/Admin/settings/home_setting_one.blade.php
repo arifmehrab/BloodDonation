@@ -91,6 +91,33 @@
                   <input type="text" class="form-control" id="donar_regi_button_bn" name="donar_regi_button_bn" value="{{ $home_setting_one->donar_regi_button_bn }}">
                 </div><!-- End group -->
 
+                <div class="form-group">
+                  <label class="form-control-label" for="site_video_link">website Video Overview url</label>
+                  <textarea class="form-control" name="site_video_link" id="site_video_link" cols="30" rows="5">
+                    {{ $home_setting_one->site_video_link }}
+                  </textarea>
+                </div><!-- End group -->
+
+                <div class="form-group">
+                  <label class="form-control-label" for="user_title">User Dashboard Title</label>
+                  <textarea class="form-control" name="user_title" id="user_title" cols="30" rows="5">
+                    {{ $home_setting_one->user_title }}
+                  </textarea>
+                </div><!-- End group -->
+
+                <div class="form-group">
+                  <label class="form-control-label" for="user_gallery_title">User Dashboard Gallery Image Title</label>
+                  <textarea class="form-control" name="user_gallery_title" id="user_gallery_title" cols="30" rows="5">
+                    {{ $home_setting_one->user_gallery_title }}
+                  </textarea>
+                </div><!-- End group -->
+
+                <div class="form-group">
+                  <label class="form-control-label" for="user_post_title">User Dashboard Post Title</label>
+                  <textarea class="form-control" name="user_post_title" id="user_post_title" cols="30" rows="5">
+                    {{ $home_setting_one->user_post_title }}
+                  </textarea>
+                </div><!-- End group -->
 
                 <button class="btn btn-primary btn-sm" type="submit">Update Setting</button>
             </div><!-- End colum -->

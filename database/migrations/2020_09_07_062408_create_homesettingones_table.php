@@ -25,6 +25,10 @@ class CreateHomesettingonesTable extends Migration
             $table->text('donar_regi_subtitle_bn')->nullable();
             $table->string('donar_regi_button_en')->nullable();
             $table->string('donar_regi_button_bn')->nullable();
+            $table->string('site_video_link')->nullable();
+            $table->longText('user_title')->nullable();
+            $table->longText('user_gallery_title')->nullable();
+            $table->longText('user_post_title')->nullable();
             $table->timestamps();
         });
     }

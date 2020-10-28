@@ -73,7 +73,7 @@
                     <p><strong>District(জেলা):-</strong> {{ $row->district->district_name }}</p>
                     <p><strong>Upazila(থানা):-</strong> {{ $row->upazila }}</p>
                     <p><strong>Local Area(ইউনিয়ন):-</strong> {{ $row->local_area }}</p>
-                    <p><a href="tel:{{ $row->phone_number }}" id="card_button">Call Now</a></p>
+                    <p><a href="tel:{{ $row->phone_number }}" id="card_button">Call:- {{ $row->phone_number }}</a></p>
                   </div>
             </div><!-- End colum -->
             @endforeach
@@ -189,33 +189,151 @@
     <div class="container wow fadeInUp">
 
         <div class="row">
-        @foreach($home_counts as $row)
+
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 
                 <div class="counter-block-1 text-center">
-
-                    <i class="{{ $row->icon }} icon"></i>
-                    <span class="counter">
-                     @if(Session::get('language') == 'english')
-                     {{ $row->count_number_en }}
-                     @else
-                     {{ $row->count_number_bn }}
-                     @endif
-                    </span>                            
-                    <h4>
-                     @if(Session::get('language') == 'english')
-                     {{ $row->title_english }}
-                     @else
-                     {{ $row->title_bangla }}
-                     @endif
-                    </h4>
+                    @if(Session::get('language') == 'english')
+                    <span class="counter">{{ $total_donar }}</span>                            
+                    <h4>Blood Donors</h4>
+                    @else
+                    <span class="counter">{{ $total_donar }}</span>                            
+                    <h4>রক্তদাতার সংখ্যা</h4>
+                    @endif
 
                 </div>
 
             </div> <!--  end .col-lg-3  -->
-        @endforeach
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                <div class="counter-block-1 text-center">
+                    @if(Session::get('language') == 'english')
+                    <span class="counter">{{ $blood_o_p }}</span>                            
+                    <h4>O+ Donors</h4>
+                    @else
+                    <span class="counter">{{ $blood_o_p }}</span>                            
+                    <h4>O+ রক্তদাতার</h4>
+                    @endif
+
+                </div>
+
+            </div> <!--  end .col-lg-3  -->
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                <div class="counter-block-1 text-center">
+                    @if(Session::get('language') == 'english')
+                    <span class="counter">{{ $blood_o_N }}</span>                            
+                    <h4>O- Donors</h4>
+                    @else
+                    <span class="counter">{{ $blood_o_N }}</span>                            
+                    <h4>O- রক্তদাতার</h4>
+                    @endif
+
+                </div>
+
+            </div> <!--  end .col-lg-3  -->
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                <div class="counter-block-1 text-center">
+                    @if(Session::get('language') == 'english')
+                    <span class="counter">{{ $blood_A_p }}</span>                            
+                    <h4>A+ Donors</h4>
+                    @else
+                    <span class="counter">{{ $blood_A_p }}</span>                            
+                    <h4>A+ রক্তদাতার</h4>
+                    @endif
+
+                </div>
+
+            </div> <!--  end .col-lg-3  -->
+
 
         </div> <!-- end row  -->
+        <!-- secend Counter -->
+        
+        <div class="row">
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                <div class="counter-block-1 text-center">
+                    @if(Session::get('language') == 'english')
+                    <span class="counter">{{ $blood_A_N }}</span>                            
+                    <h4>A- Donors</h4>
+                    @else
+                    <span class="counter">{{ $blood_A_N }}</span>                            
+                    <h4>A- রক্তদাতার</h4>
+                    @endif
+
+                </div>
+
+            </div> <!--  end .col-lg-3  -->
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                <div class="counter-block-1 text-center">
+                    @if(Session::get('language') == 'english')
+                    <span class="counter">{{ $blood_B_p }}</span>                            
+                    <h4>B+ Donors</h4>
+                    @else
+                    <span class="counter">{{ $blood_B_p }}</span>                            
+                    <h4>B+ রক্তদাতার</h4>
+                    @endif
+
+                </div>
+
+            </div> <!--  end .col-lg-3  -->
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                <div class="counter-block-1 text-center">
+                    @if(Session::get('language') == 'english')
+                    <span class="counter">{{ $blood_B_N }}</span>                            
+                    <h4>B- Donors</h4>
+                    @else
+                    <span class="counter">{{ $blood_B_N }}</span>                            
+                    <h4>B- রক্তদাতার</h4>
+                    @endif
+
+                </div>
+
+            </div> <!--  end .col-lg-3  -->
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                <div class="counter-block-1 text-center">
+                    @if(Session::get('language') == 'english')
+                    <span class="counter">{{ $blood_AB_p }}</span>                            
+                    <h4>AB+ Donors</h4>
+                    @else
+                    <span class="counter">{{ $blood_AB_p }}</span>                            
+                    <h4>AB+ রক্তদাতার</h4>
+                    @endif
+
+                </div>
+
+            </div> <!--  end .col-lg-3  -->
+
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+
+                <div class="counter-block-1 text-center">
+                    @if(Session::get('language') == 'english')
+                    <span class="counter">{{ $blood_AB_N }}</span>                            
+                    <h4>AB- Donors</h4>
+                    @else
+                    <span class="counter">{{ $blood_AB_N }}</span>                            
+                    <h4>AB- রক্তদাতার</h4>
+                    @endif
+
+                </div>
+
+            </div> <!--  end .col-lg-3  -->
+
+
+        </div> <!-- end row  -->
+        <!-- secend Counter End -->
 
     </div> <!--  end .container  -->
 

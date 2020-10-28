@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\category;
 use App\Models\post;
 use Auth;
+use Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -19,7 +20,7 @@ class PostController extends Controller
     public function index()
     {
         // index
-        $posts = post::where('status', 1)->latest()->get();
+        $posts = post::where('status', 1)->orderBy('id', 'DESC')->get();
         return view('Backend.Admin.post.index', compact('posts'));
     }
 
@@ -60,10 +61,9 @@ class PostController extends Controller
             'image'      => 'required|image|mimes:jpg,png,jpeg,gif|max:4072',
         ]);
         //Image Check
-        if ($request->hasFile('image')) {
+        if($request->hasFile('image')) {
             $thumbnails_image = hexdec(uniqid()) . '.' . $request->image->getClientOriginalExtension();
-            $imagePath        = public_path('/Backend/assets/media/posts/');
-            $request->image->move($imagePath, $thumbnails_image);
+            Image::make($request->image)->resize(950, 650)->save('Backend/assets/media/posts/' . $thumbnails_image);
         }
         // post Store database
         $userId        = Auth::user()->id;
@@ -140,11 +140,10 @@ class PostController extends Controller
         // update post
         $postUpdate = post::find($id);
          //Image Update
-         if ($request->hasFile('image')) {
+         if($request->hasFile('image')) {
             @unlink(public_path('/Backend/assets/media/posts/'.$postUpdate->image));
             $thumbnails_image = hexdec(uniqid()) . '.' . $request->image->getClientOriginalExtension();
-            $imagePath        = public_path('/Backend/assets/media/posts/');
-            $request->image->move($imagePath, $thumbnails_image);
+            Image::make($request->image)->resize(950, 650)->save('Backend/assets/media/posts/' . $thumbnails_image);
             $postUpdate->image = $thumbnails_image;
         }
         $userId        = Auth::user()->id;

@@ -20,15 +20,19 @@ use Illuminate\Support\Facades\Route;
 // Auth
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 // pages Route Here
-Route::get('/', 'Frontend\FrontendController@index');
+Route::get('/', 'Frontend\FrontendController@index')->middleware('cache.headers:private,no-cache,max-age=300;etag');
 // About Us
 Route::get('/about-us', 'Frontend\FrontendController@aboutUs')->name('about.us');
 // Blood Summary
 Route::get('/blood-summary', 'Frontend\FrontendController@bloodSummary')->name('blood.summary');
 // Donation page
 Route::get('/donation', 'Frontend\FrontendController@donation')->name('blood.donation');
+
+// Adsense Related Pages
+Route::get('/terms-of-service', 'Frontend\FrontendController@termsOfService')->name('terms.of.service');
+Route::get('/privacy-policy', 'Frontend\FrontendController@privacyPolicy')->name('privac.policy');
+Route::get('/copyrights-disclaimer', 'Frontend\FrontendController@copyRightDisclaimar')->name('copy.wright.disclaimar');
 
 // Post Route Here =======================
 Route::get('/posts', 'Frontend\FrontendController@posts')->name('blood.post');
@@ -46,8 +50,6 @@ Route::get('/show/upazila', 'Frontend\FrontendController@showUpazila')->name('sh
 
 // Show District By ajax For Search 
 Route::get('/search/destrict/show', 'Frontend\SearchController@searchDestrictShow')->name('search.district.show');
-// Blood Local Area Suggest By ajax 
-Route::get('/area/search', 'Frontend\SearchController@areaSearch')->name('area.search');
 // Search Resuit
 Route::post('/search/resuit', 'Frontend\SearchController@searchResuit')->name('search.resuit');
 // Subscriber 
@@ -152,6 +154,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.', 'mi
     // Newsletter 
     Route::get('/subscriber', 'HomeSettingController@subscriber')->name('subscriber');
     Route::delete('/subscriber/delete/{id}', 'HomeSettingController@newsLetterDelete')->name('subscriber.delete');
+
+    // Adsense Related Pages
+    Route::get('/adsense-page', 'AdsenseController@adsensePages')->name('adsense.page');
+    Route::put('/adsense/page/update/{id}', 'AdsenseController@adsensePagesUpdate')->name('adsense.page.update');
    
 });
 // =====================================================================

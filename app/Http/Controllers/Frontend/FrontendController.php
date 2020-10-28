@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\adsense;
 use App\Models\bloodrequest;
 use App\Models\bloodsummary;
 use App\Models\category;
@@ -10,7 +11,6 @@ use App\Models\district;
 use App\Models\divition;
 use App\Models\homesettingone;
 use App\Models\home_title_setting;
-use App\Models\homecountdown;
 use App\Models\ourteam;
 use App\Models\photogallery;
 use App\Models\seosetting;
@@ -38,6 +38,16 @@ class FrontendController extends Controller
         OpenGraph::setUrl('http://current.url.com');
         OpenGraph::addProperty('type', 'articles');
 
+        // blood Donar Count
+        $total_donar = User::all()->count();
+        $blood_o_p = User::where('blood_group', 'O+')->count();
+        $blood_o_N = User::where('blood_group', 'O-')->count();
+        $blood_A_p = User::where('blood_group', 'A+')->count();
+        $blood_A_N = User::where('blood_group', 'A-')->count();
+        $blood_B_p = User::where('blood_group', 'B+')->count();
+        $blood_B_N = User::where('blood_group', 'B-')->count();
+        $blood_AB_p = User::where('blood_group', 'AB+')->count();
+        $blood_AB_N = User::where('blood_group', 'AB-')->count();
         // Divitions
         $divitions = divition::all();
         $users     = User::orderBy('id', 'DESC')->paginate(4);
@@ -45,10 +55,9 @@ class FrontendController extends Controller
         $homeSettingOne   = homesettingone::first();
         $homeTitleSetting = home_title_setting::first();
         $photo_gallery    = photogallery::select('photo_gallery')->orderBy('id', 'DESC')->get();
-        $home_counts = homecountdown::all();
         // Post
         $posts = post::where('status', 1)->latest()->take(3)->get();
-        return view('Frontend.index', compact('divitions', 'users', 'homeSettingOne', 'homeTitleSetting', 'photo_gallery', 'home_counts', 'posts'));
+        return view('Frontend.index', compact('divitions', 'users', 'homeSettingOne', 'homeTitleSetting', 'photo_gallery', 'posts', 'total_donar', 'blood_o_p', 'blood_o_N', 'blood_A_p', 'blood_A_N', 'blood_B_p', 'blood_B_N', 'blood_AB_p', 'blood_AB_N'));
     }
     // About Us ======================
     public function aboutUs()
@@ -118,6 +127,29 @@ class FrontendController extends Controller
         OpenGraph::addProperty('locale:alternate', ['pt-pt', 'en-us']);
         // view
        return view('Frontend.pages.post_details', compact('postDetails', 'categories', 'catPost', 'latest_post', 'related_post'));
+    }
+    // Terms of Service Page
+    public function termsOfService()
+    {
+        $terms_of_service = adsense::select('terms_of_service')->first();
+        return view('Frontend.pages.terms_of_service', compact('terms_of_service'));
+    }
+    // Privacy Policy
+    public function privacyPolicy()
+    {
+        $privacy_policy = adsense::select('privacy_policy')->first();
+        return view('Frontend.pages.privacy_policy', compact('privacy_policy'));
+    }
+    // DMCA / Copyrights Disclaimer
+    public function copyRightDisclaimar()
+    {
+        $copywright_dsc = adsense::select('copywright_disclaimar')->first();
+        return view('Frontend.pages.copywright_disclaimar', compact('copywright_dsc'));
+    }
+    // Donartion Pages ==============
+    public function donation()
+    {
+        return view('Frontend.pages.donation');
     }
     // Category wais post ==============
     public function categoryPost($slug)

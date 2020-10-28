@@ -64,20 +64,23 @@
 				<!-- END MENU -->
 			</div>
 		</div>
+		@php
+			$user_title = App\Models\homesettingone::select('user_title', 'user_gallery_title', 'user_post_title')->first();
+		@endphp
 		<div class="col-md-8">
             <div class="profile-content">
 				<marquee scrollamount="3" behavior="scroll" direction="left"
 					onmouseover="this.stop();"
 					onmouseout="this.start();">
-					<h4>রক্ত কৃত্তিমভাবে তৈরী করা যায় না, শুধুমাত্র একজন মানুষই পারে আরেকজন মানুষকে বাঁচাতে। কিন্তু দুঃখের ব্যাপার, প্রতিবছর বহুসংখ্যক মানুষ মারা যাচ্ছে জরুরি মুহুর্তে প্রয়োজনীয় রক্তের অভাবে। বর্তমানে বাংলাদেশে</h4>
+					<h4>{{ $user_title->user_title }}</h4>
 				</marquee>
 				<hr>
 				<div>
-					<p>রক্ত কৃত্তিমভাবে তৈরী করা যায় না, শুধুমাত্র একজন মানুষই পারে আরেকজন মানুষকে বাঁচাতে। কিন্তু দুঃখের ব্যাপার, প্রতিবছর বহুসংখ্যক মানুষ মারা যাচ্ছে জরুরি মুহুর্তে প্রয়োজনীয় রক্তের অভাবে। বর্তমানে বাংলাদেশে প্রতি বছর রক্তের প্রয়োজন মাত্র ৯ লাখ ব্যাগ। অথচ জনবহুল এই দেশে এখনো মানুষ মারা যাচ্ছে রক্তের অভাবে। রক্তের এই চাহিদা খুব সহজেই পূরণ করা সম্ভব হবে যদি আমাদের দেশের সকল প্রান্তের পূর্ণবয়স্ক মানুষদের।</p>
+					<p>{{ $user_title->user_gallery_title }}</p>
 					<a class="btn btn-success" href="{{ route('user.photo.gallery') }}">All PHOTO</a> /
 					<a class="btn btn-primary" href="{{ route('user.photo.gallery.create') }}">ADD PHOTO</a>
 					<hr>
-					<p>রক্ত কৃত্তিমভাবে তৈরী করা যায় না, শুধুমাত্র একজন মানুষই পারে আরেকজন মানুষকে বাঁচাতে। কিন্তু দুঃখের ব্যাপার, প্রতিবছর বহুসংখ্যক মানুষ মারা যাচ্ছে জরুরি মুহুর্তে প্রয়োজনীয় রক্তের অভাবে। বর্তমানে বাংলাদেশে প্রতি বছর রক্তের প্রয়োজন মাত্র ৯ লাখ ব্যাগ। অথচ জনবহুল এই দেশে এখনো মানুষ মারা যাচ্ছে রক্তের অভাবে। রক্তের এই চাহিদা খুব সহজেই পূরণ করা সম্ভব হবে যদি আমাদের দেশের সকল প্রান্তের পূর্ণবয়স্ক মানুষদের।</p>
+					<p>{{ $user_title->user_post_title }}</p>
 					<a class="btn btn-info" href="{{ route('user.post.create') }}">ADD POST</a>/ 
 					<a class="btn btn-success" href="{{ route('user.post.index') }}">ALL POST</a>
 				</div>

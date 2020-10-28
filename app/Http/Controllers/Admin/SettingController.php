@@ -25,7 +25,7 @@ class SettingController extends Controller
         if ($request->hasFile('logo')) {
             @unlink(public_path('Backend/assets/media/logo/' . $settingUpdate->logo));
             $logo_name = hexdec(uniqid()) . '.' . $request->logo->getClientOriginalExtension();
-            Image::make($request->logo)->resize(186, 48)->save('Backend/assets/media/logo/' . $logo_name);
+            Image::make($request->logo)->resize(180, 48)->save('Backend/assets/media/logo/' . $logo_name);
             $settingUpdate->logo = $logo_name;
         }
         $settingUpdate->email        = $request->email;

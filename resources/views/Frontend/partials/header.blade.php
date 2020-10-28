@@ -1,5 +1,5 @@
 @php 
-$headerT_top_title = App\Models\homesettingone::select('header_top_title_en', 'header_top_title_bn')->first();
+$headerT_top_title = App\Models\homesettingone::select('header_top_title_en', 'header_top_title_bn', 'site_video_link')->first();
 $top_donation_button = App\Models\home_title_setting::select('donation_button_en', 'donation_button_bn')->first();
 $settings = App\Models\setting::select('logo', 'facebook_url', 'twitter_url', 'youtube_url')->first();
 $blog_categories = App\Models\category::all();
@@ -12,7 +12,7 @@ $blog_categories = App\Models\category::all();
         <div class="container">
 
             <div class="row">
-                <div class="col-md-7 col-sm-12">
+                <div class="col-md-4 col-sm-12">
 
                     <marquee scrollamount="3" behavior="scroll" direction="left"
 					onmouseover="this.stop();"
@@ -25,20 +25,26 @@ $blog_categories = App\Models\category::all();
 				   </marquee>
 
                 </div>
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-6 col-sm-12">
                     <div class="top_button">
                         @if(Session::get('language') == 'english')
                         <a href="{{ route('bangla.language') }}" class="btn btn-info">Bangla</a>
                         @else
                         <a href="{{ route('english.language') }}" class="btn btn-info">English</a>
                         @endif
-                        <a href="" class="btn btn-primary">
+                        <a href="{{ route('blood.donation') }}" class="btn btn-primary">
                           @if(Session::get('language') == 'english')
                           {{ $top_donation_button->donation_button_en  }}
                           @else
                           {{ $top_donation_button->donation_button_bn }}
                           @endif
                         </a>  
+                        <a class="btn btn-success" target="__blank" href="{{ $headerT_top_title->site_video_link }}">
+                            WebSite Use Overview
+                        </a>
+                        <a class="btn btn-primary" href="{{ url('/register') }}">
+                            রেজিস্ট্রেশন করুন
+                        </a>
                        </div>
                 </div>
                 <div class="col-md-2 col-sm-12">
@@ -86,11 +92,11 @@ $blog_categories = App\Models\category::all();
                             <a href="{{ route('blood.summary') }}">Blood Summary</a>
                         </li>
 
-                        <li class="drop"><a href="{{ route('blood.post') }}">Blog Post</a>
+                        <li class="drop"><a href="{{ route('blood.post') }}">News</a>
                             <ul class="drop-down">
 
 
-                                <li><a href="{{ route('blood.post') }}" title="all post">All Post</a></li>
+                                <li><a href="{{ route('blood.post') }}" title="all post">All News</a></li>
                                 <li class="drop"><a href="#">Categories</a>
                                     <ul class="drop-down level3">
                                         @foreach($blog_categories as $row)

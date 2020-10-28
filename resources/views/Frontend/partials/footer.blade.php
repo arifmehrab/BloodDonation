@@ -126,13 +126,13 @@
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="index.html">Terms of Service</a>
+                                    <a href="{{ route('terms.of.service') }}">Terms of Service</a>
                                 </li>
                                 <li>
-                                    <a href="#">Privacy Policy</a>
+                                    <a href="{{ route('privac.policy') }}">Privacy Policy</a>
                                 </li>   
                                 <li>
-                                    <a href="#">DMCA / Copyrights Disclaimer</a>
+                                    <a href="{{ route('copy.wright.disclaimar') }}">DMCA / Copyrights Disclaimer</a>
                                 </li> 
                             </ul>
                         </nav>

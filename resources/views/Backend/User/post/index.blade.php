@@ -154,6 +154,7 @@
                     @endforeach
                   </tbody>
                 </table>
+                <span>{{ $user_aproved_post->links() }}</span>
                 @endif
                 <!-- End user approved Post list -->
             </div><!-- end card -->

@@ -12,9 +12,9 @@
 
                 <h3>
                     @if(Session::get('language') == 'english')
-                    Blog Posts
+                    All News
                     @else
-                    ব্লগ পোস্ট
+                    সব খবর
                     @endif
                 </h3>
 

@@ -17,15 +17,7 @@ class SearchController extends Controller
         $district = district::where('divition_id', $divitionId)->get();
         return response()->json($district);
     }
-    // Area Suggest By ajax =============
-    public function areaSearch(Request $request)
-    {
-        $value  = $request->value;
-        $location =  User::where('local_area', 'LIKE', '%'.$value.'%')
-        ->where('status', 1)
-        ->get()->groupBy('role_id');
-        return response()->json($location);
-    }
+
     // Search Resuit ====================
     public function searchResuit(Request $request)
     {
